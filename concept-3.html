@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekaterina Kuznetsova — Amalfi Coast Photographer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f5f0e8;
+            --cream-dark: #ebe4d8;
+            --terracotta: #c17f59;
+            --terracotta-light: #d4a07e;
+            --terracotta-dark: #a56a47;
+            --olive: #7a8b5e;
+            --olive-light: #95a87a;
+            --brown: #3a2f2a;
+            --brown-light: #5a4d46;
+            --warm-white: #faf8f4;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Spectral', Georgia, serif;
+            background-color: var(--cream);
+            color: var(--brown);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── Back Link ─── */
+        .back-link {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 100;
+            font-family: 'Spectral', serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--brown);
+            text-decoration: none;
+            background: rgba(245, 240, 232, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(58, 47, 42, 0.12);
+            transition: all 0.4s ease;
+        }
+
+        .back-link:hover {
+            background: var(--brown);
+            color: var(--cream);
+            border-color: var(--brown);
+        }
+
+        .back-link svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 6px;
+            vertical-align: -2px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover svg {
+            transform: translateX(-3px);
+        }
+
+        /* ─── Editorial Hero ─── */
+        .hero {
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .hero-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 0 2rem 0;
+            border-bottom: 1px solid rgba(58, 47, 42, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .hero-issue {
+            font-family: 'Spectral', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--brown-light);
+        }
+
+        .hero-masthead {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 6rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: var(--brown);
+            margin-bottom: 1rem;
+        }
+
+        .hero-tagline {
+            font-family: 'Spectral', serif;
+            font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--terracotta);
+            margin: 1.2rem auto 0;
+        }
+
+        /* ─── Editorial Grid ─── */
+        .editorial-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr 0.8fr 1fr;
+            grid-template-rows: 1fr 0.6fr 1fr;
+            gap: 0.6rem;
+            max-height: 70vh;
+            animation: gridReveal 1.2s ease-out;
+        }
+
+        @keyframes gridReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .grid-img {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .grid-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: saturate(0.9) contrast(1.02);
+        }
+
+        .grid-img:hover img {
+            transform: scale(1.04);
+        }
+
+        .grid-img-1 { grid-column: 1 / 2; grid-row: 1 / 3; }
+        .grid-img-2 { grid-column: 2 / 3; grid-row: 1 / 2; }
+        .grid-img-3 { grid-column: 3 / 5; grid-row: 1 / 2; }
+        .grid-img-4 { grid-column: 2 / 3; grid-row: 2 / 4; }
+        .grid-img-5 { grid-column: 3 / 4; grid-row: 2 / 3; }
+        .grid-img-6 { grid-column: 4 / 5; grid-row: 2 / 4; }
+        .grid-img-7 { grid-column: 1 / 2; grid-row: 3 / 4; }
+        .grid-img-8 { grid-column: 3 / 4; grid-row: 3 / 4; }
+
+        .hero-scroll-cue {
+            text-align: center;
+            padding: 2.5rem 0 0;
+            animation: gentleBounce 2.5s ease-in-out infinite;
+        }
+
+        .hero-scroll-cue span {
+            font-family: 'Spectral', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-scroll-cue svg {
+            width: 20px;
+            height: 20px;
+            color: var(--terracotta);
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        /* ─── Section Shared ─── */
+        .section-label {
+            font-family: 'Spectral', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--terracotta);
+            opacity: 0.3;
+        }
+
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.15;
+            color: var(--brown);
+            letter-spacing: -0.01em;
+        }
+
+        .section-heading em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+
+        /* ─── Packages Section ─── */
+        .packages {
+            padding: 8rem 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .packages-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: end;
+        }
+
+        .packages-intro-text {
+            font-family: 'Spectral', serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--brown-light);
+            max-width: 480px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-top: 1px solid rgba(58, 47, 42, 0.12);
+        }
+
+        .package-card {
+            padding: 3.5rem 3rem;
+            border-bottom: 1px solid rgba(58, 47, 42, 0.12);
+            position: relative;
+            transition: background-color 0.5s ease;
+        }
+
+        .package-card:nth-child(odd) {
+            border-right: 1px solid rgba(58, 47, 42, 0.12);
+        }
+
+        .package-card:hover {
+            background-color: rgba(193, 127, 89, 0.04);
+        }
+
+        .package-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem;
+            color: var(--terracotta);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .package-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            color: var(--brown);
+        }
+
+        .package-price {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            font-weight: 500;
+            color: var(--terracotta);
+            margin-bottom: 2rem;
+            line-height: 1;
+        }
+
+        .package-details {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .package-details li {
+            font-family: 'Spectral', serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--brown-light);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(58, 47, 42, 0.06);
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .package-details li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--terracotta);
+            opacity: 0.5;
+        }
+
+        .package-ideal {
+            font-family: 'Spectral', serif;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--olive);
+            font-weight: 400;
+        }
+
+        /* ─── Image Break ─── */
+        .image-break {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 0.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .image-break img {
+            width: 100%;
+            height: 50vh;
+            object-fit: cover;
+            filter: saturate(0.9) contrast(1.02);
+        }
+
+        /* ─── Details Section ─── */
+        .details {
+            padding: 8rem 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .details-layout {
+            display: grid;
+            grid-template-columns: 0.4fr 1fr;
+            gap: 6rem;
+            margin-top: 4rem;
+        }
+
+        .details-sidebar {
+            position: relative;
+        }
+
+        .details-sidebar-img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            filter: saturate(0.85) contrast(1.02);
+        }
+
+        .details-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .detail-block {
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(58, 47, 42, 0.1);
+        }
+
+        .detail-block:last-child {
+            border-bottom: none;
+        }
+
+        .detail-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--brown);
+        }
+
+        .detail-text {
+            font-family: 'Spectral', serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: var(--brown-light);
+        }
+
+        .detail-text strong {
+            font-weight: 500;
+            color: var(--brown);
+        }
+
+        .locations-list {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .location-tag {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--terracotta);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .location-tag:hover {
+            opacity: 1;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .time-slot {
+            background: var(--warm-white);
+            padding: 1.5rem;
+            border-left: 2px solid var(--terracotta);
+        }
+
+        .time-slot-label {
+            font-family: 'Spectral', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 0.3rem;
+        }
+
+        .time-slot-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--brown);
+        }
+
+        /* ─── CTA Section ─── */
+        .cta {
+            padding: 6rem 2rem;
+            background: var(--brown);
+            color: var(--cream);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(193, 127, 89, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-label {
+            font-family: 'Spectral', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--terracotta-light);
+            margin-bottom: 2rem;
+        }
+
+        .cta-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            color: var(--cream);
+        }
+
+        .cta-heading em {
+            font-style: italic;
+            color: var(--terracotta-light);
+        }
+
+        .cta-sub {
+            font-family: 'Spectral', serif;
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: rgba(245, 240, 232, 0.6);
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Spectral', serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1rem 2.2rem;
+            transition: all 0.4s ease;
+        }
+
+        .cta-btn--primary {
+            background: var(--terracotta);
+            color: var(--cream);
+            border: 1px solid var(--terracotta);
+        }
+
+        .cta-btn--primary:hover {
+            background: var(--terracotta-light);
+            border-color: var(--terracotta-light);
+        }
+
+        .cta-btn--secondary {
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid rgba(245, 240, 232, 0.25);
+        }
+
+        .cta-btn--secondary:hover {
+            border-color: var(--cream);
+            background: rgba(245, 240, 232, 0.06);
+        }
+
+        .cta-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            padding: 4rem 2rem 3rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(58, 47, 42, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--brown);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .footer-link {
+            font-family: 'Spectral', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-link:hover {
+            color: var(--terracotta);
+        }
+
+        .footer-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copy {
+            font-family: 'Spectral', serif;
+            font-size: 0.8rem;
+            color: rgba(58, 47, 42, 0.4);
+            font-weight: 300;
+        }
+
+        .footer-concept {
+            font-family: 'Spectral', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            opacity: 0.5;
+        }
+
+        /* ─── Fade-in Animation ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1024px) {
+            .editorial-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(4, 1fr);
+                max-height: 80vh;
+            }
+
+            .grid-img-1 { grid-column: 1; grid-row: 1; }
+            .grid-img-2 { grid-column: 2; grid-row: 1; }
+            .grid-img-3 { grid-column: 1 / 3; grid-row: 2; }
+            .grid-img-4 { grid-column: 1; grid-row: 3; }
+            .grid-img-5 { grid-column: 2; grid-row: 3; }
+            .grid-img-6 { grid-column: 1; grid-row: 4; }
+            .grid-img-7 { grid-column: 2; grid-row: 4; }
+            .grid-img-8 { display: none; }
+
+            .packages-intro {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .details-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .details-sidebar-img {
+                aspect-ratio: 16/9;
+                max-height: 40vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 1.2rem;
+            }
+
+            .hero-top-bar {
+                padding: 0.5rem 0 1.5rem;
+            }
+
+            .editorial-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(3, 1fr);
+                max-height: 55vh;
+                gap: 0.4rem;
+            }
+
+            .grid-img-1 { grid-column: 1; grid-row: 1; }
+            .grid-img-2 { grid-column: 2; grid-row: 1; }
+            .grid-img-3 { grid-column: 1 / 3; grid-row: 2; }
+            .grid-img-4 { grid-column: 1; grid-row: 3; }
+            .grid-img-5 { grid-column: 2; grid-row: 3; }
+            .grid-img-6,
+            .grid-img-7,
+            .grid-img-8 { display: none; }
+
+            .packages {
+                padding: 5rem 1.2rem;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .package-card:nth-child(odd) {
+                border-right: none;
+            }
+
+            .package-card {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .details {
+                padding: 5rem 1.2rem;
+            }
+
+            .time-slots {
+                grid-template-columns: 1fr;
+            }
+
+            .image-break {
+                grid-template-columns: 1fr;
+                padding: 0;
+            }
+
+            .image-break img {
+                height: 35vh;
+            }
+
+            .image-break img:last-child {
+                display: none;
+            }
+
+            .cta {
+                padding: 5rem 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .footer-links {
+                gap: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+
+            .back-link {
+                top: 1rem;
+                left: 1rem;
+                font-size: 0.7rem;
+                padding: 0.5rem 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name {
+                font-size: 2.2rem;
+            }
+
+            .hero-tagline {
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+            }
+
+            .locations-list {
+                gap: 1rem;
+            }
+
+            .location-tag {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5m0 0l7 7m-7-7l7-7"/>
+        </svg>
+        Back to concepts
+    </a>
+
+    <!-- ════════ HERO ════════ -->
+    <section class="hero">
+        <div class="hero-top-bar">
+            <span class="hero-issue">Amalfi Coast, Italy</span>
+            <span class="hero-issue">Photography Sessions</span>
+        </div>
+
+        <div class="hero-masthead">
+            <h1 class="hero-name">Ekaterina Kuznetsova</h1>
+            <p class="hero-tagline">Photo Sessions on the Amalfi Coast</p>
+            <div class="hero-divider"></div>
+        </div>
+
+        <div class="editorial-grid">
+            <div class="grid-img grid-img-1">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/vEWoObULrNQE1PcdFJgyO.jpeg" alt="Amalfi Coast photo session" loading="eager">
+            </div>
+            <div class="grid-img grid-img-2">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/8NRQWeu57oxvJexL-b6nj.jpeg" alt="Couple on the Amalfi Coast" loading="eager">
+            </div>
+            <div class="grid-img grid-img-3">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/gmUILnNUFI2SegTdP0sxL.jpeg" alt="Positano portrait session" loading="eager">
+            </div>
+            <div class="grid-img grid-img-4">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/lM7ZFp5j2T-cUl2MWy6hK.jpeg" alt="Golden hour Amalfi" loading="eager">
+            </div>
+            <div class="grid-img grid-img-5">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/Mxm4t9wrd2BuPQSJTA3FI.jpeg" alt="Atrani photo walk" loading="eager">
+            </div>
+            <div class="grid-img grid-img-6">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/wkfdDRA3hMwpKWRhqmBAn.jpeg" alt="Sunset couples session" loading="eager">
+            </div>
+            <div class="grid-img grid-img-7">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/ai4HFBPRoW52AJh_rLps9.jpg" alt="Italian coastline portrait" loading="eager">
+            </div>
+            <div class="grid-img grid-img-8">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/gzwt8jzQvab4eoYHMviTg.jpg" alt="Amalfi architecture session" loading="eager">
+            </div>
+        </div>
+
+        <div class="hero-scroll-cue">
+            <span>Explore</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ════════ PACKAGES ════════ -->
+    <section class="packages" id="packages">
+        <div class="packages-intro reveal">
+            <div>
+                <div class="section-label">Sessions &amp; Pricing</div>
+                <h2 class="section-heading">Every frame,<br>a <em>memory</em><br>to keep</h2>
+            </div>
+            <p class="packages-intro-text">
+                Each session is tailored to capture authentic moments against the breathtaking backdrop of the Amalfi Coast. From sun-drenched cliffside paths to pastel-colored alleyways, your story unfolds naturally.
+            </p>
+        </div>
+
+        <div class="packages-grid reveal">
+            <div class="package-card">
+                <div class="package-number">01</div>
+                <h3 class="package-name">Express Session</h3>
+                <div class="package-price">&euro;120</div>
+                <ul class="package-details">
+                    <li>One iconic location &mdash; Amalfi, Atrani, or Positano</li>
+                    <li>Up to 45 minutes of shooting</li>
+                    <li>Up to 50 professionally edited images</li>
+                </ul>
+                <p class="package-ideal">Perfect for solo travelers</p>
+            </div>
+            <div class="package-card">
+                <div class="package-number">02</div>
+                <h3 class="package-name">Signature Photo Walk</h3>
+                <div class="package-price">&euro;200</div>
+                <ul class="package-details">
+                    <li>2&ndash;3 stunning locations along the coast</li>
+                    <li>Up to 1.5 hours of shooting</li>
+                    <li>Up to 100 professionally edited images</li>
+                </ul>
+                <p class="package-ideal">Ideal for couples, love stories &amp; maternity sessions</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ IMAGE BREAK ════════ -->
+    <div class="image-break reveal">
+        <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/EPoRUFdyo6Nlx3d6Q2Wgr.jpeg" alt="Amalfi Coast scenic view">
+        <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/WZDvtJkHbyyPs-7Rg6r8C.jpeg" alt="Couple walking in Positano">
+    </div>
+
+    <!-- ════════ DETAILS ════════ -->
+    <section class="details" id="details">
+        <div class="reveal">
+            <div class="section-label">Session Details</div>
+            <h2 class="section-heading">Where light meets <em>la dolce vita</em></h2>
+        </div>
+
+        <div class="details-layout">
+            <div class="details-sidebar reveal">
+                <img class="details-sidebar-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/lM7ZFp5j2T-cUl2MWy6hK.jpeg" alt="Portrait on the Amalfi Coast">
+            </div>
+            <div class="details-content">
+                <div class="detail-block reveal">
+                    <h3 class="detail-title">Locations</h3>
+                    <p class="detail-text">Sessions take place in the most photogenic corners of the Amalfi Coast. Additional destinations are available upon request.</p>
+                    <div class="locations-list">
+                        <span class="location-tag">Amalfi</span>
+                        <span class="location-tag">Atrani</span>
+                        <span class="location-tag">Positano</span>
+                    </div>
+                </div>
+                <div class="detail-block reveal">
+                    <h3 class="detail-title">The Best Light</h3>
+                    <p class="detail-text">The Mediterranean sun creates two magical windows each day. I recommend scheduling during these hours for the most beautiful, soft light and fewer crowds.</p>
+                    <div class="time-slots">
+                        <div class="time-slot">
+                            <div class="time-slot-label">Morning Golden Hour</div>
+                            <div class="time-slot-time">7:00 &ndash; 9:00 AM</div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="time-slot-label">Evening Golden Hour</div>
+                            <div class="time-slot-time">After 5:00 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-block reveal">
+                    <h3 class="detail-title">What to Expect</h3>
+                    <p class="detail-text">No stiff poses or awkward directing. We walk, we talk, we explore &mdash; and I capture the genuine moments in between. All images are professionally color-graded and delivered within <strong>5&ndash;7 days</strong> via a private online gallery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ CTA ════════ -->
+    <section class="cta" id="contact">
+        <div class="cta-label reveal">Book Your Session</div>
+        <h2 class="cta-heading reveal">Let&rsquo;s create something <em>beautiful</em> together</h2>
+        <p class="cta-sub reveal">Reach out to discuss dates, locations, and how to make the most of your time on the Amalfi Coast.</p>
+        <div class="cta-buttons reveal">
+            <a href="mailto:hello@example.com" class="cta-btn cta-btn--primary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                </svg>
+                Email Me
+            </a>
+            <a href="https://t.me/photographer_amalfi" target="_blank" rel="noopener" class="cta-btn cta-btn--secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                Telegram
+            </a>
+        </div>
+    </section>
+
+    <!-- ════════ FOOTER ════════ -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">Ekaterina Kuznetsova</div>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/photographer_amalfi" target="_blank" rel="noopener" class="footer-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                    </svg>
+                    Instagram
+                </a>
+                <a href="#" class="footer-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
+                    </svg>
+                    Portfolio
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">&copy; 2026 Ekaterina Kuznetsova. All rights reserved.</span>
+            <span class="footer-concept">Concept: Terracotta</span>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for reveal animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -60px 0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

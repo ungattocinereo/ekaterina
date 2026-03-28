@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katerina — Amalfi Coast Photographer | Design Concepts</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+    color: #e8e4df;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+    color: #8a8580;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .concepts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .concept-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .concept-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .concept-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .concept-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .concept-card .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    transition: background 0.4s;
+  }
+
+  .concept-card:hover .overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%);
+  }
+
+  .concept-number {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 0.5rem;
+  }
+
+  .concept-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .concept-desc {
+    font-size: 0.8rem;
+    color: #a09a94;
+    line-height: 1.6;
+  }
+
+  .concept-arrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .concept-card:hover .concept-arrow {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.5);
+  }
+
+  .footer {
+    margin-top: 4rem;
+    text-align: center;
+    color: #5a5550;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Katerina Photography</h1>
+  <p>Amalfi Coast &nbsp;·&nbsp; Design Concepts</p>
+</div>
+
+<div class="concepts">
+
+  <a href="concept-1.html" class="concept-card">
+    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/w_it-Cqu7wpf_bllUT34C.jpeg" alt="Dolce Vita">
+    <div class="overlay">
+      <span class="concept-number">Concept 01</span>
+      <h2 class="concept-name">Dolce Vita</h2>
+      <p class="concept-desc">Cinematic dark aesthetic, dramatic photo collage hero, moody golden tones</p>
+    </div>
+    <div class="concept-arrow">→</div>
+  </a>
+
+  <a href="concept-2.html" class="concept-card">
+    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/OnP_Ppd8wWULiGhsUk3RD.jpg" alt="Limoncello">
+    <div class="overlay">
+      <span class="concept-number">Concept 02</span>
+      <h2 class="concept-name">Limoncello</h2>
+      <p class="concept-desc">Bright Mediterranean whites, airy cards, pops of lemon yellow and azure blue</p>
+    </div>
+    <div class="concept-arrow">→</div>
+  </a>
+
+  <a href="concept-3.html" class="concept-card">
+    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/vEWoObULrNQE1PcdFJgyO.jpeg" alt="Terracotta">
+    <div class="overlay">
+      <span class="concept-number">Concept 03</span>
+      <h2 class="concept-name">Terracotta</h2>
+      <p class="concept-desc">Warm earthy editorial, magazine-style asymmetric grid, elegant serif typography</p>
+    </div>
+    <div class="concept-arrow">→</div>
+  </a>
+
+  <a href="concept-4.html" class="concept-card">
+    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/p0-CnKtWMLredAeZFaqu3.jpeg" alt="Azure">
+    <div class="overlay">
+      <span class="concept-number">Concept 04</span>
+      <h2 class="concept-name">Azure</h2>
+      <p class="concept-desc">Cool coastal minimalism, floating glass elements, smooth scroll animations</p>
+    </div>
+    <div class="concept-arrow">→</div>
+  </a>
+
+</div>
+
+<div class="footer">
+  Select a concept to preview the full landing page
+</div>
+
+</body>
+</html>

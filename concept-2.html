@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekaterina Kuznetsova — Photo Sessions on the Amalfi Coast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --lemon: #e8c840;
+            --lemon-light: #f5e89a;
+            --lemon-pale: #fdf6d8;
+            --azure: #2a6cb6;
+            --azure-light: #4a8fd4;
+            --azure-pale: #e8f1fa;
+            --bg: #faf8f5;
+            --bg-warm: #f5f2ed;
+            --text: #2c2c2c;
+            --text-light: #6b6560;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Back link */
+        .back-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .back-nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .back-nav a {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .back-nav a:hover {
+            color: var(--azure);
+        }
+
+        .back-nav a::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .back-nav a:hover::before {
+            width: 30px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--lemon-pale) 0%, transparent 70%);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--azure-pale) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease both;
+        }
+
+        .hero-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--azure);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--lemon);
+        }
+
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .hero-name em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--azure);
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 36px;
+            background: var(--lemon);
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(232, 200, 64, 0.3);
+        }
+
+        .hero-cta:hover {
+            background: #d4b530;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(232, 200, 64, 0.4);
+        }
+
+        .hero-cta svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Photo collage */
+        .hero-photos {
+            position: relative;
+            height: 560px;
+            animation: fadeIn 1.2s ease 0.3s both;
+        }
+
+        .photo-card {
+            position: absolute;
+            background: var(--white);
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.03) !important;
+            box-shadow: 0 16px 60px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            z-index: 10;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .photo-card-1 {
+            width: 240px;
+            height: 320px;
+            top: 20px;
+            left: 0;
+            transform: rotate(-4deg);
+            z-index: 3;
+        }
+
+        .photo-card-2 {
+            width: 220px;
+            height: 280px;
+            top: 0;
+            right: 20px;
+            transform: rotate(3deg);
+            z-index: 2;
+        }
+
+        .photo-card-3 {
+            width: 200px;
+            height: 260px;
+            bottom: 40px;
+            left: 60px;
+            transform: rotate(2deg);
+            z-index: 4;
+        }
+
+        .photo-card-4 {
+            width: 180px;
+            height: 240px;
+            bottom: 20px;
+            right: 0;
+            transform: rotate(-3deg);
+            z-index: 1;
+        }
+
+        .photo-card-polaroid {
+            padding: 8px 8px 40px 8px;
+        }
+
+        .photo-card-polaroid::after {
+            content: 'Amalfi Coast';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Lemon decoration */
+        .lemon-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--lemon);
+            border-radius: 50%;
+            z-index: 20;
+            opacity: 0.7;
+        }
+
+        .lemon-dot-1 { top: 10px; left: 50%; }
+        .lemon-dot-2 { bottom: 60px; left: 30px; width: 8px; height: 8px; }
+        .lemon-dot-3 { top: 40%; right: -5px; width: 16px; height: 16px; opacity: 0.5; }
+
+        /* Sections common */
+        section {
+            padding: 100px 24px;
+        }
+
+        .section-label {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--azure);
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 540px;
+            margin: 0 auto 60px;
+        }
+
+        /* Packages */
+        .packages {
+            background: var(--white);
+        }
+
+        .packages-grid {
+            max-width: 960px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .package-card {
+            position: relative;
+            background: var(--bg);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .package-card-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .package-card-body {
+            padding: 32px;
+        }
+
+        .package-card-tag {
+            display: inline-block;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--azure);
+            background: var(--azure-pale);
+            padding: 4px 14px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .package-card-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .package-card-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--lemon);
+            margin-bottom: 20px;
+            line-height: 1;
+            text-shadow: 0 0 0 transparent;
+        }
+
+        .package-card-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .package-features li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .package-features li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            background: var(--lemon);
+            border-radius: 50%;
+            margin-top: 8px;
+        }
+
+        .package-ideal {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--azure);
+            padding-top: 16px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        /* Photo strip */
+        .photo-strip {
+            padding: 0;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .photo-strip-inner {
+            display: flex;
+            gap: 8px;
+            animation: scrollStrip 40s linear infinite;
+        }
+
+        .photo-strip-img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        @keyframes scrollStrip {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-308px * 5)); }
+        }
+
+        /* Details */
+        .details {
+            position: relative;
+        }
+
+        .details::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--lemon));
+        }
+
+        .details-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .detail-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+        }
+
+        .detail-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+            background: var(--lemon-pale);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detail-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--lemon);
+        }
+
+        .detail-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .detail-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Gallery mosaic */
+        .gallery {
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+            gap: 12px;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            height: 320px;
+        }
+
+        .gallery-item:nth-child(2) {
+            height: 320px;
+        }
+
+        .gallery-item:nth-child(3) {
+            height: 320px;
+        }
+
+        .gallery-item:nth-child(4) {
+            height: 260px;
+        }
+
+        .gallery-item:nth-child(5) {
+            grid-column: span 2;
+            height: 260px;
+        }
+
+        .gallery-item:nth-child(6) {
+            height: 260px;
+        }
+
+        /* CTA / Contact */
+        .cta-section {
+            text-align: center;
+            position: relative;
+            padding: 120px 24px;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--lemon-pale) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+            font-weight: 300;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .cta-title em {
+            font-style: italic;
+            color: var(--azure);
+        }
+
+        .cta-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 48px;
+            position: relative;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .cta-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .cta-btn-primary {
+            background: var(--lemon);
+            color: var(--text);
+            box-shadow: 0 4px 20px rgba(232, 200, 64, 0.3);
+        }
+
+        .cta-btn-primary:hover {
+            background: #d4b530;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(232, 200, 64, 0.4);
+        }
+
+        .cta-btn-secondary {
+            background: var(--azure);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(42, 108, 182, 0.2);
+        }
+
+        .cta-btn-secondary:hover {
+            background: var(--azure-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(42, 108, 182, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.6);
+            padding: 60px 24px;
+            text-align: center;
+        }
+
+        .footer-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--lemon);
+        }
+
+        .footer-links a svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--lemon);
+            margin: 0 auto 24px;
+            opacity: 0.5;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            opacity: 0.4;
+        }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-label {
+                justify-content: center;
+            }
+
+            .hero-photos {
+                height: 400px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .photo-card-1 {
+                width: 180px;
+                height: 240px;
+                top: 20px;
+                left: 10px;
+            }
+
+            .photo-card-2 {
+                width: 160px;
+                height: 210px;
+                top: 0;
+                right: 10px;
+            }
+
+            .photo-card-3 {
+                width: 150px;
+                height: 200px;
+                bottom: 30px;
+                left: 50px;
+            }
+
+            .photo-card-4 {
+                width: 140px;
+                height: 190px;
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+                height: 240px;
+            }
+
+            .gallery-item:nth-child(2),
+            .gallery-item:nth-child(3) {
+                height: 200px;
+            }
+
+            .gallery-item:nth-child(4) {
+                height: 200px;
+            }
+
+            .gallery-item:nth-child(5) {
+                grid-column: span 1;
+                height: 200px;
+            }
+
+            .gallery-item:nth-child(6) {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 70px 20px;
+            }
+
+            .hero {
+                padding: 90px 20px 40px;
+            }
+
+            .hero-photos {
+                height: 340px;
+            }
+
+            .photo-card-1 {
+                width: 150px;
+                height: 200px;
+            }
+
+            .photo-card-2 {
+                width: 130px;
+                height: 170px;
+            }
+
+            .photo-card-3 {
+                width: 130px;
+                height: 170px;
+                left: 30px;
+            }
+
+            .photo-card-4 {
+                width: 120px;
+                height: 160px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                height: 220px;
+            }
+
+            .gallery-item:nth-child(5) {
+                grid-column: span 1;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back Navigation -->
+    <nav class="back-nav" id="backNav">
+        <a href="index.html">Back to concepts</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="hero-label">Amalfi Coast, Italy</div>
+                <h1 class="hero-name">Ekaterina<br><em>Kuznetsova</em></h1>
+                <p class="hero-tagline">Photo Sessions on the Amalfi Coast</p>
+                <a href="#packages" class="hero-cta">
+                    Explore Sessions
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                </a>
+            </div>
+            <div class="hero-photos">
+                <div class="photo-card photo-card-1 photo-card-polaroid">
+                    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/mDuQ2O3GAX2Dd3RF-92qC.jpg" alt="Photo session on the Amalfi Coast" loading="eager">
+                </div>
+                <div class="photo-card photo-card-2">
+                    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/OnP_Ppd8wWULiGhsUk3RD.jpg" alt="Photo session on the Amalfi Coast" loading="eager">
+                </div>
+                <div class="photo-card photo-card-3">
+                    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/QxlCb8a0ejXi6_hgcVeyt.jpg" alt="Photo session on the Amalfi Coast" loading="eager">
+                </div>
+                <div class="photo-card photo-card-4">
+                    <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/0YTLY9cNS-D21hfCpkvBj.jpg" alt="Photo session on the Amalfi Coast" loading="eager">
+                </div>
+                <div class="lemon-dot lemon-dot-1"></div>
+                <div class="lemon-dot lemon-dot-2"></div>
+                <div class="lemon-dot lemon-dot-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages" id="packages">
+        <div class="section-label reveal">Sessions</div>
+        <h2 class="section-title reveal">Choose Your <em>Experience</em></h2>
+        <p class="section-subtitle reveal">Every session is tailored to capture your unique story against the breathtaking Amalfi backdrop</p>
+
+        <div class="packages-grid">
+            <div class="package-card reveal">
+                <img class="package-card-image" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/0Gsr20lQiQ-qBRVmI1DhH.jpg" alt="Express Session">
+                <div class="package-card-body">
+                    <div class="package-card-tag">Quick &amp; Beautiful</div>
+                    <h3 class="package-card-name">Express Session</h3>
+                    <div class="package-card-price">&euro;120</div>
+                    <ul class="package-features">
+                        <li>One iconic location: Amalfi, Atrani, or Positano</li>
+                        <li>Up to 45 minutes of shooting</li>
+                        <li>Up to 50 professionally edited images</li>
+                    </ul>
+                    <p class="package-ideal">Perfect for solo travelers</p>
+                </div>
+            </div>
+
+            <div class="package-card reveal">
+                <img class="package-card-image" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/bY6SCbJ5kJV08tEc5T513.jpg" alt="Signature Photo Walk">
+                <div class="package-card-body">
+                    <div class="package-card-tag">Most Popular</div>
+                    <h3 class="package-card-name">Signature Photo Walk</h3>
+                    <div class="package-card-price">&euro;200</div>
+                    <ul class="package-features">
+                        <li>2&ndash;3 stunning locations along the coast</li>
+                        <li>Up to 1.5 hours of shooting</li>
+                        <li>Up to 100 professionally edited images</li>
+                    </ul>
+                    <p class="package-ideal">Ideal for couples, love stories &amp; maternity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Strip -->
+    <div class="photo-strip">
+        <div class="photo-strip-inner">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/SDUcKCTUxkzLSp3EolWEm.jpg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/UcnX6hyXltQPqoR7bvP3I.jpg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/OLX5vRk6NwqG4H_GgfbZf.jpg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/UXwkkDrEibSqI3jLA-5SV.jpeg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/mDuQ2O3GAX2Dd3RF-92qC.jpg" alt="Amalfi Coast photo" loading="lazy">
+            <!-- Duplicate for seamless loop -->
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/SDUcKCTUxkzLSp3EolWEm.jpg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/UcnX6hyXltQPqoR7bvP3I.jpg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/OLX5vRk6NwqG4H_GgfbZf.jpg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/UXwkkDrEibSqI3jLA-5SV.jpeg" alt="Amalfi Coast photo" loading="lazy">
+            <img class="photo-strip-img" src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/mDuQ2O3GAX2Dd3RF-92qC.jpg" alt="Amalfi Coast photo" loading="lazy">
+        </div>
+    </div>
+
+    <!-- Details Section -->
+    <section class="details" id="details">
+        <div class="section-label reveal">Details</div>
+        <h2 class="section-title reveal">Good to Know</h2>
+        <p class="section-subtitle reveal">A few things to help you plan the perfect session</p>
+
+        <div class="details-grid">
+            <div class="detail-card reveal">
+                <div class="detail-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                </div>
+                <h3>Locations</h3>
+                <p>Sessions in Amalfi, Atrani, and Positano. Additional destinations along the coast available upon request.</p>
+            </div>
+
+            <div class="detail-card reveal">
+                <div class="detail-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
+                </div>
+                <h3>Best Light</h3>
+                <p>Early morning, 7:00&ndash;9:00 AM, or golden evening after 5:00 PM. The magic hours when the coast glows.</p>
+            </div>
+
+            <div class="detail-card reveal">
+                <div class="detail-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" /></svg>
+                </div>
+                <h3>Delivery</h3>
+                <p>All images are professionally color-graded and delivered within 5&ndash;7 days via a private online gallery.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="section-label reveal">Portfolio</div>
+        <h2 class="section-title reveal">Recent Stories</h2>
+        <p class="section-subtitle reveal">A glimpse into the moments captured along the coast</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/UXwkkDrEibSqI3jLA-5SV.jpeg" alt="Amalfi Coast photography" loading="lazy">
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/OnP_Ppd8wWULiGhsUk3RD.jpg" alt="Amalfi Coast photography" loading="lazy">
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/OLX5vRk6NwqG4H_GgfbZf.jpg" alt="Amalfi Coast photography" loading="lazy">
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/mDuQ2O3GAX2Dd3RF-92qC.jpg" alt="Amalfi Coast photography" loading="lazy">
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/QxlCb8a0ejXi6_hgcVeyt.jpg" alt="Amalfi Coast photography" loading="lazy">
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original/SDUcKCTUxkzLSp3EolWEm.jpg" alt="Amalfi Coast photography" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <h2 class="cta-title reveal">Let's Create Something<br><em>Beautiful</em></h2>
+        <p class="cta-subtitle reveal">Send me a message and let's plan your dream session on the Amalfi Coast</p>
+        <div class="cta-buttons reveal">
+            <a href="mailto:hello@example.com" class="cta-btn cta-btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                Email Me
+            </a>
+            <a href="https://t.me/photographer_amalfi" class="cta-btn cta-btn-secondary" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                Telegram
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-name">Ekaterina Kuznetsova</div>
+        <div class="footer-links">
+            <a href="https://www.instagram.com/photographer_amalfi" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                Instagram
+            </a>
+            <a href="#" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 003.75 21z" /></svg>
+                Portfolio
+            </a>
+        </div>
+        <div class="footer-divider"></div>
+        <p class="footer-copy">&copy; 2026 Ekaterina Kuznetsova. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Nav shadow on scroll
+        const nav = document.getElementById('backNav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
