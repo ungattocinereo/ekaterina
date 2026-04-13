@@ -686,6 +686,16 @@ section {
   box-shadow: 0 12px 40px rgba(74, 154, 202, 0.35);
 }
 
+.cta-btn-whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: white;
+}
+
+.cta-btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(37, 211, 102, 0.35);
+}
+
 .cta-btn-secondary {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
