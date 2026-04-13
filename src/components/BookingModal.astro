@@ -1,0 +1,463 @@
+---
+// Booking request modal.
+// Triggered by any element with [data-open-booking].
+// Submits JSON to /api/booking which forwards it to the Telegram bot.
+---
+
+<dialog id="booking-dialog" class="booking-dialog" aria-labelledby="booking-title">
+  <form id="booking-form" class="booking-form" novalidate>
+    <button type="button" class="booking-close" aria-label="Close" data-close-booking>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+
+    <header class="booking-head">
+      <div class="section-label"><span>Book a session</span></div>
+      <h2 id="booking-title" class="booking-title">Your Amalfi story starts here</h2>
+      <p class="booking-sub">Fill in a few details and Katerina will get back to you to confirm the date and finalise the plan.</p>
+    </header>
+
+    <div class="booking-grid">
+      <label class="field">
+        <span class="field-label">Name <em aria-hidden="true">*</em></span>
+        <input type="text" name="name" required maxlength="120" autocomplete="name" placeholder="Your name" />
+      </label>
+
+      <label class="field">
+        <span class="field-label">Session type <em aria-hidden="true">*</em></span>
+        <select name="sessionType" required>
+          <option value="" disabled selected>Choose a package</option>
+          <option value="express">Express Session — €120</option>
+          <option value="signature">Signature Photo Walk — €200</option>
+          <option value="custom">Custom / other</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span class="field-label">Location</span>
+        <input type="text" name="location" maxlength="200" placeholder="Amalfi, Positano, Atrani…" />
+      </label>
+
+      <label class="field">
+        <span class="field-label">Preferred date <em aria-hidden="true">*</em></span>
+        <input type="date" name="date" required />
+      </label>
+
+      <label class="field">
+        <span class="field-label">Email</span>
+        <input type="email" name="email" maxlength="200" autocomplete="email" placeholder="you@example.com" />
+      </label>
+
+      <label class="field">
+        <span class="field-label">Phone / WhatsApp</span>
+        <input type="tel" name="phone" maxlength="60" autocomplete="tel" placeholder="+39…" />
+      </label>
+
+      <label class="field field-full">
+        <span class="field-label">Comment <small>(optional)</small></span>
+        <textarea name="comment" maxlength="2000" rows="4" placeholder="Anything we should know — occasion, group size, preferences…"></textarea>
+      </label>
+
+      <!-- Honeypot: real users won't fill a hidden field. Invisible to people & screen readers. -->
+      <div class="hp" aria-hidden="true">
+        <label>
+          Website
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+      </div>
+    </div>
+
+    <p class="booking-contact-hint">Leave at least one contact — email or phone — so Katerina can reach you.</p>
+
+    <div class="booking-status" role="status" aria-live="polite" hidden></div>
+
+    <div class="booking-actions">
+      <button type="button" class="cta-btn cta-btn-secondary" data-close-booking>Cancel</button>
+      <button type="submit" class="cta-btn cta-btn-primary" data-submit-booking>
+        <span class="submit-label">Send request</span>
+        <svg class="submit-spinner" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="40 60" />
+        </svg>
+      </button>
+    </div>
+
+    <p class="booking-privacy">
+      By submitting, you agree to the <a href="https://amalfi.day/privacy" target="_blank" rel="noopener">Privacy Policy</a>.
+      Your data is sent directly to Katerina and is not stored on this site.
+    </p>
+  </form>
+</dialog>
+
+<style>
+  .booking-dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: min(720px, calc(100vw - 2rem));
+    width: 100%;
+    max-height: calc(100vh - 2rem);
+    color: var(--text-primary);
+    overflow: visible;
+  }
+
+  .booking-dialog::backdrop {
+    background: rgba(8, 14, 25, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: backdropIn 0.3s ease forwards;
+  }
+
+  @keyframes backdropIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .booking-form {
+    position: relative;
+    background: linear-gradient(180deg, rgba(22, 36, 56, 0.95), rgba(15, 27, 45, 0.95));
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem 2.25rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+    animation: dialogIn 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  @keyframes dialogIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .booking-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+  }
+
+  .booking-close:hover {
+    color: var(--soft-white);
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+  }
+
+  .booking-close svg { width: 16px; height: 16px; }
+
+  .booking-head { text-align: center; margin-bottom: 1.8rem; }
+
+  .booking-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    color: var(--soft-white);
+    line-height: 1.2;
+    margin: 0.6rem 0 0.6rem;
+  }
+
+  .booking-sub {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .field-full { grid-column: 1 / -1; }
+
+  .field-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .field-label em {
+    color: var(--azure-light);
+    font-style: normal;
+    margin-left: 0.15rem;
+  }
+
+  .field-label small {
+    font-size: 0.7rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 0.75rem 0.9rem;
+    transition: all 0.25s ease;
+    width: 100%;
+  }
+
+  .field textarea { resize: vertical; min-height: 100px; }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: rgba(240, 244, 248, 0.35);
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: rgba(74, 154, 202, 0.6);
+    background: rgba(74, 154, 202, 0.07);
+    box-shadow: 0 0 0 4px rgba(74, 154, 202, 0.12);
+  }
+
+  .field input:invalid:not(:placeholder-shown),
+  .field select:invalid:not([value=""]) {
+    border-color: rgba(217, 90, 90, 0.5);
+  }
+
+  .field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236bb5d9' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+  }
+
+  .field select option {
+    background: #162438;
+    color: var(--text-primary);
+  }
+
+  .field input[type='date'] {
+    color-scheme: dark;
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .booking-contact-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0.5rem 0 1.2rem;
+  }
+
+  .booking-status {
+    font-size: 0.9rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .booking-status[data-kind='error'] {
+    background: rgba(217, 90, 90, 0.1);
+    border: 1px solid rgba(217, 90, 90, 0.25);
+    color: #f2a8a8;
+  }
+
+  .booking-status[data-kind='success'] {
+    background: rgba(74, 202, 154, 0.1);
+    border: 1px solid rgba(74, 202, 154, 0.25);
+    color: #9be3c5;
+  }
+
+  .booking-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .booking-actions .cta-btn {
+    font-family: inherit;
+    padding: 0.85rem 1.6rem;
+    font-size: 0.85rem;
+  }
+
+  [data-submit-booking] .submit-spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    animation: submitSpin 1s linear infinite;
+  }
+
+  [data-submit-booking][data-loading='true'] .submit-label { opacity: 0.6; }
+  [data-submit-booking][data-loading='true'] .submit-spinner { display: inline-block; }
+  [data-submit-booking][disabled] { opacity: 0.7; cursor: wait; }
+
+  @keyframes submitSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  .booking-privacy {
+    margin-top: 1.2rem;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .booking-privacy a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .booking-privacy a:hover { color: var(--azure-light); }
+
+  @media (max-width: 600px) {
+    .booking-form {
+      padding: 2rem 1.25rem 1.5rem;
+      border-radius: 18px;
+    }
+    .booking-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const dialog = document.getElementById('booking-dialog');
+    const form = document.getElementById('booking-form');
+    if (!dialog || !form) return;
+
+    const status = form.querySelector('.booking-status');
+    const submitBtn = form.querySelector('[data-submit-booking]');
+
+    function setStatus(kind, message) {
+      if (!status) return;
+      if (!kind) {
+        status.hidden = true;
+        status.textContent = '';
+        status.removeAttribute('data-kind');
+        return;
+      }
+      status.hidden = false;
+      status.setAttribute('data-kind', kind);
+      status.textContent = message;
+    }
+
+    function openDialog() {
+      setStatus(null);
+      if (typeof dialog.showModal === 'function') {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+    }
+
+    function closeDialog() {
+      if (typeof dialog.close === 'function') dialog.close();
+      else dialog.removeAttribute('open');
+    }
+
+    document.querySelectorAll('[data-open-booking]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        openDialog();
+      });
+    });
+
+    form.querySelectorAll('[data-close-booking]').forEach(function (el) {
+      el.addEventListener('click', function () { closeDialog(); });
+    });
+
+    // Click on backdrop closes the dialog.
+    dialog.addEventListener('click', function (e) {
+      if (e.target === dialog) closeDialog();
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!submitBtn) return;
+
+      const data = new FormData(form);
+      const email = String(data.get('email') || '').trim();
+      const phone = String(data.get('phone') || '').trim();
+      if (!email && !phone) {
+        setStatus('error', 'Please leave at least one contact — email or phone.');
+        return;
+      }
+
+      const payload = {
+        name: String(data.get('name') || ''),
+        sessionType: String(data.get('sessionType') || ''),
+        location: String(data.get('location') || ''),
+        date: String(data.get('date') || ''),
+        email: email,
+        phone: phone,
+        comment: String(data.get('comment') || ''),
+        website: String(data.get('website') || ''),
+        meta: {
+          url: window.location.href,
+          referrer: document.referrer || '',
+          language: navigator.language || '',
+          screen: window.screen.width + 'x' + window.screen.height,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+        },
+      };
+
+      submitBtn.setAttribute('disabled', 'true');
+      submitBtn.setAttribute('data-loading', 'true');
+      setStatus(null);
+
+      try {
+        const res = await fetch('/api/booking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const json = await res.json().catch(function () { return { ok: false }; });
+        if (res.ok && json.ok) {
+          form.reset();
+          setStatus('success', "Thank you — your request is on its way. Katerina will contact you shortly.");
+          setTimeout(closeDialog, 2800);
+        } else if (res.status === 422) {
+          setStatus('error', 'Please fill in all required fields.');
+        } else {
+          setStatus('error', 'Something went wrong. Please try Telegram or WhatsApp — links below.');
+        }
+      } catch (_err) {
+        setStatus('error', 'Network error. Please try Telegram or WhatsApp — links below.');
+      } finally {
+        submitBtn.removeAttribute('disabled');
+        submitBtn.removeAttribute('data-loading');
+      }
+    });
+  })();
+</script>
