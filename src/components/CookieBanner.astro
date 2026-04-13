@@ -130,9 +130,18 @@
     var banner = document.getElementById('cookie-banner');
     if (!banner) return;
 
-    function loadAnalytics() {
-      // Hook for optional analytics — only fired after explicit consent.
-      window.dispatchEvent(new CustomEvent('cookie-consent-granted'));
+    function updateConsent(granted) {
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          analytics_storage: granted ? 'granted' : 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+      }
+      window.dispatchEvent(
+        new CustomEvent(granted ? 'cookie-consent-granted' : 'cookie-consent-denied')
+      );
     }
 
     function setConsent(value) {
@@ -143,7 +152,7 @@
         );
       } catch (_e) { /* ignore */ }
       banner.hidden = true;
-      if (value === 'accepted') loadAnalytics();
+      updateConsent(value === 'accepted');
     }
 
     var stored = null;
@@ -151,8 +160,8 @@
 
     if (!stored || !stored.value) {
       banner.hidden = false;
-    } else if (stored.value === 'accepted') {
-      loadAnalytics();
+    } else {
+      updateConsent(stored.value === 'accepted');
     }
 
     banner.addEventListener('click', function (e) {
