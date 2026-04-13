@@ -120,7 +120,6 @@ export const POST: APIRoute = async ({ request }) => {
   const techBlock = [
     `Время:     ${nowIso}`,
     `IP:        ${ip}`,
-    `URL:       ${meta.url ?? '—'}`,
     `Referrer:  ${meta.referrer || 'direct'}`,
     `Язык:      ${meta.language ?? '—'}`,
     `TZ:        ${meta.timezone ?? '—'}`,
