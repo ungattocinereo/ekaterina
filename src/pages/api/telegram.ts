@@ -46,9 +46,12 @@ export const POST: APIRoute = async ({ request }) => {
   const msg = update.message;
   if (msg?.chat?.id) {
     const name = msg.from?.first_name ?? msg.chat.first_name ?? '';
+    const chatId = msg.chat.id;
+    const idLine = `\n\n🆔 Your chat id: <code>${chatId}</code>`;
     await tg(token, 'sendMessage', {
-      chat_id: msg.chat.id,
-      text: replyText(msg.from?.language_code, name),
+      chat_id: chatId,
+      text: replyText(msg.from?.language_code, name) + idLine,
+      parse_mode: 'HTML',
       disable_web_page_preview: true,
     });
   }
