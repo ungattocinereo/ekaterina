@@ -626,15 +626,18 @@ import Icon from './Icon.astro';
           setStatus('error', 'Please fill in all required fields (name, session type, date, contact).');
         } else {
           form.removeAttribute('data-state');
-          var reason = (json && (json.error || json.detail)) ? ' (' + (json.error || json.detail) + ')' : '';
+          var parts = [];
+          if (json && json.error) parts.push(json.error);
+          if (json && json.detail) parts.push(String(json.detail).slice(0, 240));
+          var reason = parts.length ? ' (' + parts.join(' — ') + ')' : '';
           setStatus(
             'error',
-            'Could not send your request' + reason + '. Please try WhatsApp or Telegram — links below.'
+            'Could not send your request' + reason + '. Please try WhatsApp or Instagram — links below.'
           );
         }
       } catch (_err) {
         form.removeAttribute('data-state');
-        setStatus('error', 'Network error. Please try Telegram or WhatsApp — links below.');
+        setStatus('error', 'Network error. Please try WhatsApp or Instagram — links below.');
       } finally {
         submitBtn.removeAttribute('disabled');
         submitBtn.removeAttribute('data-loading');
