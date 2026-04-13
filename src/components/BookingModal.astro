@@ -1,4 +1,6 @@
 ---
+import Icon from './Icon.astro';
+
 // Booking request modal.
 // Triggered by any element with [data-open-booking].
 // Submits JSON to /api/booking which forwards it to the Telegram bot.
@@ -7,9 +9,7 @@
 <dialog id="booking-dialog" class="booking-dialog" aria-labelledby="booking-title">
   <form id="booking-form" class="booking-form" novalidate>
     <button type="button" class="booking-close" aria-label="Close" data-close-booking>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-      </svg>
+      <Icon name="close" />
     </button>
 
     <header class="booking-head">
@@ -56,7 +56,7 @@
 
       <label class="field field-full">
         <span class="field-label">Comment <small>(optional)</small></span>
-        <textarea name="comment" maxlength="2000" rows="4" placeholder="Anything we should know — occasion, group size, preferences…"></textarea>
+        <textarea name="comment" maxlength="2000" rows="3" placeholder="Anything we should know — occasion, group size, preferences…"></textarea>
       </label>
 
       <!-- Honeypot: real users won't fill a hidden field. Invisible to people & screen readers. -->
@@ -93,9 +93,10 @@
   .booking-dialog {
     border: none;
     padding: 0;
+    margin: auto;
+    inset: 0;
     background: transparent;
-    max-width: min(720px, calc(100vw - 2rem));
-    width: 100%;
+    max-width: min(620px, calc(100vw - 2rem));
     max-height: calc(100vh - 2rem);
     color: var(--text-primary);
     overflow: visible;
@@ -117,8 +118,8 @@
     position: relative;
     background: linear-gradient(180deg, rgba(22, 36, 56, 0.95), rgba(15, 27, 45, 0.95));
     border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 2.5rem 2.25rem;
+    border-radius: 20px;
+    padding: 1.75rem 1.75rem 1.5rem;
     max-height: calc(100vh - 2rem);
     overflow-y: auto;
     box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
@@ -153,43 +154,43 @@
     transform: rotate(90deg);
   }
 
-  .booking-close svg { width: 16px; height: 16px; }
+  .booking-close svg { width: 14px; height: 14px; }
 
-  .booking-head { text-align: center; margin-bottom: 1.8rem; }
+  .booking-head { text-align: center; margin-bottom: 1.2rem; }
 
   .booking-title {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    font-size: clamp(1.45rem, 2.4vw, 1.8rem);
     color: var(--soft-white);
     line-height: 1.2;
-    margin: 0.6rem 0 0.6rem;
+    margin: 0.4rem 0 0.35rem;
   }
 
   .booking-sub {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 520px;
+    line-height: 1.5;
+    max-width: 480px;
     margin: 0 auto;
   }
 
   .booking-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem 1.2rem;
-    margin-bottom: 1rem;
+    gap: 0.7rem 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .field {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.3rem;
   }
 
   .field-full { grid-column: 1 / -1; }
 
   .field-label {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -214,17 +215,17 @@
   .field select,
   .field textarea {
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--text-primary);
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
     transition: all 0.25s ease;
     width: 100%;
   }
 
-  .field textarea { resize: vertical; min-height: 100px; }
+  .field textarea { resize: vertical; min-height: 84px; }
 
   .field input::placeholder,
   .field textarea::placeholder {
@@ -271,17 +272,17 @@
   }
 
   .booking-contact-hint {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     text-align: center;
-    margin: 0.5rem 0 1.2rem;
+    margin: 0.25rem 0 0.9rem;
   }
 
   .booking-status {
-    font-size: 0.9rem;
-    padding: 0.85rem 1rem;
-    border-radius: 12px;
-    margin-bottom: 1rem;
+    font-size: 0.88rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    margin-bottom: 0.85rem;
     line-height: 1.5;
   }
 
@@ -306,7 +307,7 @@
 
   .booking-actions .cta-btn {
     font-family: inherit;
-    padding: 0.85rem 1.6rem;
+    padding: 0.7rem 1.3rem;
     font-size: 0.85rem;
   }
 
@@ -326,7 +327,7 @@
   }
 
   .booking-privacy {
-    margin-top: 1.2rem;
+    margin-top: 0.9rem;
     font-size: 0.72rem;
     color: var(--text-muted);
     text-align: center;
@@ -343,8 +344,8 @@
 
   @media (max-width: 600px) {
     .booking-form {
-      padding: 2rem 1.25rem 1.5rem;
-      border-radius: 18px;
+      padding: 1.25rem 1rem 1.1rem;
+      border-radius: 16px;
     }
     .booking-grid { grid-template-columns: 1fr; }
   }
@@ -358,6 +359,7 @@
 
     const status = form.querySelector('.booking-status');
     const submitBtn = form.querySelector('[data-submit-booking]');
+    let lastTrigger = null;
 
     function setStatus(kind, message) {
       if (!status) return;
@@ -372,7 +374,8 @@
       status.textContent = message;
     }
 
-    function openDialog() {
+    function openDialog(triggerEl) {
+      lastTrigger = triggerEl || document.activeElement;
       setStatus(null);
       if (typeof dialog.showModal === 'function') {
         dialog.showModal();
@@ -386,10 +389,17 @@
       else dialog.removeAttribute('open');
     }
 
+    // Native "close" event fires for button-close, Esc key, and programmatic close.
+    dialog.addEventListener('close', function () {
+      if (lastTrigger && typeof lastTrigger.focus === 'function') {
+        lastTrigger.focus();
+      }
+    });
+
     document.querySelectorAll('[data-open-booking]').forEach(function (el) {
       el.addEventListener('click', function (e) {
         e.preventDefault();
-        openDialog();
+        openDialog(e.currentTarget);
       });
     });
 
@@ -424,7 +434,6 @@
         comment: String(data.get('comment') || ''),
         website: String(data.get('website') || ''),
         meta: {
-          url: window.location.href,
           referrer: document.referrer || '',
           language: navigator.language || '',
           screen: window.screen.width + 'x' + window.screen.height,

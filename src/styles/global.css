@@ -681,17 +681,15 @@ section {
   line-height: 1.7;
 }
 
-.cta-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
-  flex-wrap: wrap;
-}
-
 /* ====================================================================
    HERO CTA — primary booking button (aurora border + sheen + halo)
    ==================================================================== */
+
+@property --cta-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
 
 .cta-primary-wrap {
   position: relative;
@@ -744,13 +742,13 @@ section {
   50%      { opacity: 0.9;  transform: scale(1.03); }
 }
 
-/* Rotating conic-gradient "aurora" border */
+/* Aurora border — only the gradient angle sweeps; the element stays a pill. */
 .cta-primary-aurora {
   position: absolute;
   inset: 0;
   border-radius: inherit;
   background: conic-gradient(
-    from 0deg,
+    from var(--cta-angle),
     rgba(255, 255, 255, 0.0) 0deg,
     rgba(107, 181, 217, 0.9) 55deg,
     rgba(255, 255, 255, 0.95) 95deg,
@@ -764,7 +762,8 @@ section {
 }
 
 @keyframes ctaAurora {
-  to { transform: rotate(1turn); }
+  0%   { --cta-angle: 0deg; }
+  100% { --cta-angle: 360deg; }
 }
 
 .cta-primary-inner {
@@ -1021,16 +1020,6 @@ section {
   box-shadow: 0 12px 40px rgba(74, 154, 202, 0.35);
 }
 
-.cta-btn-whatsapp {
-  background: linear-gradient(135deg, #25d366, #128c7e);
-  color: white;
-}
-
-.cta-btn-whatsapp:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(37, 211, 102, 0.35);
-}
-
 .cta-btn-secondary {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
@@ -1217,12 +1206,6 @@ footer {
     max-width: 400px;
   }
   .gallery-item { width: 250px; height: 330px; }
-  .cta-buttons { flex-direction: column; }
-  .cta-btn {
-    width: 100%;
-    max-width: 300px;
-    justify-content: center;
-  }
   .footer-inner {
     flex-direction: column;
     text-align: center;
