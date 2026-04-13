@@ -87,6 +87,22 @@ import Icon from './Icon.astro';
       Your data is sent directly to Katerina and is not stored on this site.
     </p>
   </form>
+
+  <section id="booking-thanks" class="booking-thanks" hidden>
+    <div class="thanks-mark" aria-hidden="true">
+      <svg viewBox="0 0 52 52">
+        <circle class="thanks-mark-circle" cx="26" cy="26" r="24" fill="none" stroke-width="2" />
+        <path class="thanks-mark-check" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M14 27l8 8 16-18" />
+      </svg>
+    </div>
+    <div class="section-label"><span>Request received</span></div>
+    <h2 class="thanks-title">Grazie — thank you!</h2>
+    <p class="thanks-text">
+      Katerina has just received your request and will reach out to confirm your session very soon — usually within a few hours.
+      In the meantime, feel free to write on WhatsApp or Telegram if you have any questions.
+    </p>
+    <button type="button" class="cta-btn cta-btn-secondary thanks-close" data-close-booking>Close</button>
+  </section>
 </dialog>
 
 <style>
@@ -342,6 +358,123 @@ import Icon from './Icon.astro';
 
   .booking-privacy a:hover { color: var(--azure-light); }
 
+  /* Form → Thanks swap */
+  .booking-form[data-state='sending'] { pointer-events: none; }
+
+  .booking-form[data-state='success'],
+  .booking-thanks[data-state='entering'] {
+    animation-duration: 0.45s;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    animation-fill-mode: forwards;
+  }
+
+  .booking-form[data-state='success'] { animation-name: viewLeave; }
+  .booking-thanks[data-state='entering'] { animation-name: viewEnter; }
+
+  @keyframes viewLeave {
+    to { opacity: 0; transform: translateY(-8px) scale(0.98); filter: blur(3px); }
+  }
+
+  @keyframes viewEnter {
+    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .booking-thanks {
+    position: relative;
+    background: linear-gradient(180deg, rgba(22, 36, 56, 0.95), rgba(15, 27, 45, 0.95));
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.25rem 1.75rem 1.75rem;
+    text-align: center;
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+  }
+
+  .booking-thanks .thanks-close {
+    font-family: inherit;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+  }
+
+  .thanks-mark {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(74, 154, 202, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .thanks-mark svg {
+    width: 56px;
+    height: 56px;
+    overflow: visible;
+  }
+
+  .thanks-mark-circle {
+    stroke: var(--azure-light);
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
+    animation: markCircleIn 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.1s;
+    transform-origin: center;
+  }
+
+  .thanks-mark-check {
+    stroke: var(--azure-light);
+    stroke-dasharray: 44;
+    stroke-dashoffset: 44;
+    animation: markCheckIn 0.4s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.55s;
+  }
+
+  @keyframes markCircleIn {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes markCheckIn {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .thanks-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 2.6vw, 2rem);
+    color: var(--soft-white);
+    line-height: 1.2;
+    margin: 0.6rem 0 0.75rem;
+  }
+
+  .thanks-text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .booking-form[data-state='success'],
+    .booking-thanks[data-state='entering'],
+    .thanks-mark-circle,
+    .thanks-mark-check {
+      animation: none;
+    }
+    .thanks-mark-circle,
+    .thanks-mark-check {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .booking-thanks {
+      padding: 1.5rem 1.1rem 1.25rem;
+      border-radius: 16px;
+    }
+    .thanks-mark { width: 60px; height: 60px; margin-bottom: 0.9rem; }
+    .thanks-mark svg { width: 44px; height: 44px; }
+  }
+
   @media (max-width: 600px) {
     .booking-form {
       padding: 1.25rem 1rem 1.1rem;
@@ -359,6 +492,7 @@ import Icon from './Icon.astro';
 
     const status = form.querySelector('.booking-status');
     const submitBtn = form.querySelector('[data-submit-booking]');
+    const thanks = document.getElementById('booking-thanks');
     let lastTrigger = null;
 
     function setStatus(kind, message) {
@@ -374,9 +508,33 @@ import Icon from './Icon.astro';
       status.textContent = message;
     }
 
+    function resetToForm() {
+      if (thanks) {
+        thanks.hidden = true;
+        thanks.removeAttribute('data-state');
+      }
+      form.hidden = false;
+      form.removeAttribute('data-state');
+      form.reset();
+      setStatus(null);
+    }
+
+    function showThanks() {
+      if (!thanks) return;
+      form.setAttribute('data-state', 'success');
+      form.addEventListener('animationend', function onLeave() {
+        form.removeEventListener('animationend', onLeave);
+        form.hidden = true;
+        thanks.hidden = false;
+        // Force reflow so the entering animation restarts if re-triggered.
+        void thanks.offsetWidth;
+        thanks.setAttribute('data-state', 'entering');
+      }, { once: true });
+    }
+
     function openDialog(triggerEl) {
       lastTrigger = triggerEl || document.activeElement;
-      setStatus(null);
+      resetToForm();
       if (typeof dialog.showModal === 'function') {
         dialog.showModal();
       } else {
@@ -394,6 +552,8 @@ import Icon from './Icon.astro';
       if (lastTrigger && typeof lastTrigger.focus === 'function') {
         lastTrigger.focus();
       }
+      // Defer reset so the close animation doesn't thrash content.
+      setTimeout(resetToForm, 200);
     });
 
     document.querySelectorAll('[data-open-booking]').forEach(function (el) {
@@ -403,7 +563,7 @@ import Icon from './Icon.astro';
       });
     });
 
-    form.querySelectorAll('[data-close-booking]').forEach(function (el) {
+    dialog.querySelectorAll('[data-close-booking]').forEach(function (el) {
       el.addEventListener('click', function () { closeDialog(); });
     });
 
@@ -443,6 +603,7 @@ import Icon from './Icon.astro';
 
       submitBtn.setAttribute('disabled', 'true');
       submitBtn.setAttribute('data-loading', 'true');
+      form.setAttribute('data-state', 'sending');
       setStatus(null);
 
       try {
@@ -453,15 +614,26 @@ import Icon from './Icon.astro';
         });
         const json = await res.json().catch(function () { return { ok: false }; });
         if (res.ok && json.ok) {
-          form.reset();
-          setStatus('success', "Thank you — your request is on its way. Katerina will contact you shortly.");
-          setTimeout(closeDialog, 2800);
+          // Analytics: fire a GA event if gtag is available.
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'booking_request_submitted', {
+              session_type: payload.sessionType,
+            });
+          }
+          showThanks();
         } else if (res.status === 422) {
-          setStatus('error', 'Please fill in all required fields.');
+          form.removeAttribute('data-state');
+          setStatus('error', 'Please fill in all required fields (name, session type, date, contact).');
         } else {
-          setStatus('error', 'Something went wrong. Please try Telegram or WhatsApp — links below.');
+          form.removeAttribute('data-state');
+          var reason = (json && (json.error || json.detail)) ? ' (' + (json.error || json.detail) + ')' : '';
+          setStatus(
+            'error',
+            'Could not send your request' + reason + '. Please try WhatsApp or Telegram — links below.'
+          );
         }
       } catch (_err) {
+        form.removeAttribute('data-state');
         setStatus('error', 'Network error. Please try Telegram or WhatsApp — links below.');
       } finally {
         submitBtn.removeAttribute('disabled');

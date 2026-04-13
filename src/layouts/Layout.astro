@@ -156,6 +156,24 @@ const jsonLd = {
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Google tag (gtag.js) — GDPR-compliant: analytics_storage defaults to denied
+         until the user accepts cookies; CookieBanner flips it on consent. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PVLR7KH935"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+      gtag('config', 'G-PVLR7KH935', { anonymize_ip: true });
+    </script>
   </head>
   <body>
     <slot />
