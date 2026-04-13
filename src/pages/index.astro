@@ -1,0 +1,255 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import '../styles/global.css';
+
+const baseImg = 'https://storage.googleapis.com/vigbo/gallery-photo/0da345ec-520f-46ad-bc2c-adad9b9d6e59/ab518731-08da-4254-a7a8-3354fc56f5cd/original';
+
+const heroPhotos = [
+  { src: `${baseImg}/p0-CnKtWMLredAeZFaqu3.jpeg`, alt: 'Photo session on the Amalfi Coast', cls: 'hero-photo-1' },
+  { src: `${baseImg}/Ds0dF3T-v7ESt-b8r-riU.jpeg`, alt: 'Portrait photography in Positano', cls: 'hero-photo-2' },
+  { src: `${baseImg}/8up8a1eQ9EfY-Ylv62b9i.jpeg`, alt: 'Couple photography in Amalfi', cls: 'hero-photo-3' },
+];
+
+const galleryPhotos = [
+  { src: `${baseImg}/x7agyE9yMkIAUTuUwC1ml.jpeg`, alt: 'Amalfi Coast photography' },
+  { src: `${baseImg}/OhDS-FUMi2yJZIF_2UQOu.jpeg`, alt: 'Positano photo session' },
+  { src: `${baseImg}/3gfmnnRPb0WkocmRxtICb.jpeg`, alt: 'Atrani photography' },
+  { src: `${baseImg}/jml-ATN415kd7stq9231A.jpeg`, alt: 'Couple session Amalfi' },
+  { src: `${baseImg}/qrH3qy5BqLrK5rREc1Dsw.jpeg`, alt: 'Golden hour Positano' },
+];
+---
+
+<Layout>
+  <div class="ambient-bg"></div>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-label">Amalfi Coast, Italy</div>
+        <h1 class="hero-name">Ekaterina<br /><em>Kuznetsova</em></h1>
+        <p class="hero-tagline">Photo sessions on the Amalfi Coast. Timeless images in the most beautiful places of Southern Italy.</p>
+        <a href="#packages" class="hero-cta">
+          View Packages
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      <div class="hero-photos">
+        <div class="float-accent float-accent-1"></div>
+        <div class="float-accent float-accent-2"></div>
+        {heroPhotos.map((p) => (
+          <div class={`hero-photo ${p.cls}`}>
+            <img src={p.src} alt={p.alt} loading="eager" />
+          </div>
+        ))}
+        <div class="hero-glass-overlay">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Happy clients</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-strip" aria-label="Photography gallery">
+    <div class="gallery-track">
+      {galleryPhotos.map((g) => (
+        <div class="gallery-item"><img src={g.src} alt={g.alt} loading="lazy" /></div>
+      ))}
+      {galleryPhotos.map((g) => (
+        <div class="gallery-item" aria-hidden="true"><img src={g.src} alt="" loading="lazy" /></div>
+      ))}
+    </div>
+  </section>
+
+  <section id="packages" class="packages section-padding">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span>Choose Your Experience</span></div>
+        <h2 class="section-title">Session Packages</h2>
+        <p class="section-subtitle">Every session is tailored to capture your unique story against the breathtaking Amalfi Coast backdrop.</p>
+      </div>
+      <div class="packages-grid">
+        <div class="package-card reveal reveal-delay-1">
+          <div class="package-image">
+            <img src={`${baseImg}/YcuDfdj2kga-Tkz1BOpzZ.jpeg`} alt="Express Session" loading="lazy" />
+          </div>
+          <div class="package-badge">Quick &amp; Beautiful</div>
+          <h3 class="package-name">Express Session</h3>
+          <div class="package-price">&euro;120 <span>/ session</span></div>
+          <ul class="package-features">
+            <li>One iconic location &mdash; Amalfi, Atrani, or Positano</li>
+            <li>Up to 45 minutes of shooting</li>
+            <li>Up to 50 professionally edited images</li>
+          </ul>
+          <div class="package-ideal"><strong>Perfect for:</strong> solo travelers, quick portraits, and Instagram-worthy moments</div>
+        </div>
+        <div class="package-card featured reveal reveal-delay-2">
+          <div class="package-image">
+            <img src={`${baseImg}/Rv4Am0y3Zwd9x_Z6sdRsu.jpeg`} alt="Signature Photo Walk" loading="lazy" />
+          </div>
+          <div class="package-badge">Most Popular</div>
+          <h3 class="package-name">Signature Photo Walk</h3>
+          <div class="package-price">&euro;200 <span>/ session</span></div>
+          <ul class="package-features">
+            <li>2&ndash;3 stunning locations along the coast</li>
+            <li>Up to 1.5 hours of shooting</li>
+            <li>Up to 100 professionally edited images</li>
+          </ul>
+          <div class="package-ideal"><strong>Ideal for:</strong> couples, love stories, maternity sessions, and family portraits</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="details section-padding">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span>Good to Know</span></div>
+        <h2 class="section-title">Session Details</h2>
+      </div>
+      <div class="details-grid">
+        <div class="detail-card reveal reveal-delay-1">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <h3 class="detail-title">Locations</h3>
+          <p class="detail-text">Sessions in <strong>Amalfi</strong>, <strong>Atrani</strong>, and <strong>Positano</strong>. Additional destinations available upon request.</p>
+        </div>
+        <div class="detail-card reveal reveal-delay-2">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </div>
+          <h3 class="detail-title">Best Light</h3>
+          <p class="detail-text">Early morning <strong>7:00&ndash;9:00 AM</strong> or golden evening <strong>after 5:00 PM</strong> for the most stunning natural light.</p>
+        </div>
+        <div class="detail-card reveal reveal-delay-3">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+          </div>
+          <h3 class="detail-title">Delivery</h3>
+          <p class="detail-text">All images are professionally edited and delivered via a <strong>private online gallery</strong> within 5&ndash;7 days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="cta-title">Let's Create<br />Something Beautiful</h2>
+        <p class="cta-subtitle">Ready to capture your Amalfi Coast story? Reach out to book your session or ask any questions.</p>
+      </div>
+      <div class="cta-buttons reveal reveal-delay-2">
+        <a href="mailto:hello@katerina.amalfi.day" class="cta-btn cta-btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          Email Me
+        </a>
+        <a href="https://t.me/photographer_amalfi" class="cta-btn cta-btn-secondary" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+          </svg>
+          Telegram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Ekaterina Kuznetsova</div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/photographer_amalfi" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+          Instagram
+        </a>
+        <a href="https://t.me/photographer_amalfi" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+          </svg>
+          Telegram
+        </a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Ekaterina Kuznetsova. All rights reserved.</div>
+    </div>
+
+    <div class="footer-meta">
+      <div class="footer-imprint">
+        Part of the <a href="https://amalfi.day" target="_blank" rel="noopener">amalfi.day</a> project.
+        See <a href="https://amalfi.day/privacy" target="_blank" rel="noopener">Privacy Policy</a>,
+        <a href="https://amalfi.day/cookies" target="_blank" rel="noopener">Cookie Policy</a> and
+        <a href="https://amalfi.day/terms" target="_blank" rel="noopener">Terms</a> on amalfi.day.
+      </div>
+      <div class="footer-credit">
+        © 2026. идея и разработка <a href="https://cinereo.it" target="_blank" rel="noopener">Gregory 'Cinereo' Smirnov</a>
+      </div>
+    </div>
+  </footer>
+
+  <CookieBanner />
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          const heroPhotos = document.querySelector('.hero-photos');
+          if (heroPhotos && scrolled < window.innerHeight) {
+            const photo1 = heroPhotos.querySelector('.hero-photo-1') as HTMLElement | null;
+            const photo2 = heroPhotos.querySelector('.hero-photo-2') as HTMLElement | null;
+            const photo3 = heroPhotos.querySelector('.hero-photo-3') as HTMLElement | null;
+            if (photo1) photo1.style.transform = `translateY(${scrolled * 0.04}px)`;
+            if (photo2) photo2.style.transform = `translateY(${scrolled * -0.03}px)`;
+            if (photo3) photo3.style.transform = `translateY(${scrolled * 0.06}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const href = (this as HTMLAnchorElement).getAttribute('href');
+        if (!href) return;
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</Layout>

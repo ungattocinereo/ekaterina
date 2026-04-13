@@ -1,0 +1,152 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Ekaterina Kuznetsova — Photo Sessions on the Amalfi Coast',
+  description = 'Photo sessions on the Amalfi Coast by Ekaterina Kuznetsova. Timeless portraits in Amalfi, Atrani and Positano. Book your session today.',
+  image = '/og-image.jpg',
+  canonical,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://katerina.amalfi.day';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+const ogImage = new URL(image, siteUrl).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${siteUrl}/#business`,
+      name: 'Ekaterina Kuznetsova Photography',
+      alternateName: 'Ekaterina Kuznetsova',
+      description,
+      image: ogImage,
+      url: siteUrl,
+      priceRange: '€120–€200',
+      areaServed: [
+        { '@type': 'Place', name: 'Amalfi Coast, Italy' },
+        { '@type': 'Place', name: 'Positano' },
+        { '@type': 'Place', name: 'Amalfi' },
+        { '@type': 'Place', name: 'Atrani' },
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressRegion: 'Campania',
+        addressCountry: 'IT',
+      },
+      sameAs: [
+        'https://www.instagram.com/photographer_amalfi',
+        'https://t.me/photographer_amalfi',
+      ],
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      name: 'Ekaterina Kuznetsova',
+      jobTitle: 'Photographer',
+      worksFor: { '@id': `${siteUrl}/#business` },
+      image: ogImage,
+      url: siteUrl,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Ekaterina Kuznetsova — Amalfi Coast Photographer',
+      inLanguage: 'en',
+      publisher: { '@id': `${siteUrl}/#business` },
+    },
+    {
+      '@type': 'OfferCatalog',
+      '@id': `${siteUrl}/#packages`,
+      name: 'Photo Session Packages',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          name: 'Express Session',
+          description:
+            'One iconic location — Amalfi, Atrani, or Positano. Up to 45 minutes of shooting and up to 50 professionally edited images.',
+          price: '120',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+        },
+        {
+          '@type': 'Offer',
+          name: 'Signature Photo Walk',
+          description:
+            '2–3 stunning locations along the coast. Up to 1.5 hours of shooting and up to 100 professionally edited images.',
+          price: '200',
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+        },
+      ],
+    },
+  ],
+};
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Ekaterina Kuznetsova" />
+    <meta name="keywords" content="Amalfi Coast photographer, Positano photographer, Atrani photo session, Italy photographer, couple photography Amalfi, vacation photographer Italy, Ekaterina Kuznetsova" />
+    <meta name="theme-color" content="#0f1b2d" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ekaterina Kuznetsova Photography" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Photo session on the Amalfi Coast by Ekaterina Kuznetsova" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Photo session on the Amalfi Coast by Ekaterina Kuznetsova" />
+
+    <!-- Facebook (uses og:*) — explicit FB tags for clarity -->
+    <meta property="article:author" content="Ekaterina Kuznetsova" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

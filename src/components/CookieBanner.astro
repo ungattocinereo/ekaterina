@@ -1,0 +1,166 @@
+---
+// Self-built EU-compliant cookie banner.
+// Defaults to "no consent" until the user explicitly accepts or rejects.
+---
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong>We value your privacy.</strong>
+      <span>
+        This site uses only essential cookies required for the website to function.
+        Optional analytics cookies will be used only with your consent, in accordance with the
+        GDPR and the ePrivacy Directive.
+        <a href="https://amalfi.day/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+        ·
+        <a href="https://amalfi.day/cookies" target="_blank" rel="noopener">Cookie Policy</a>
+      </span>
+    </div>
+    <div class="cookie-buttons">
+      <button type="button" class="cookie-btn cookie-btn-secondary" data-cookie-action="reject">Reject all</button>
+      <button type="button" class="cookie-btn cookie-btn-primary" data-cookie-action="accept">Accept all</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 200;
+    background: rgba(15, 27, 45, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    padding: 1.1rem 1.4rem;
+    color: #f0f4f8;
+    font-family: 'Inter', sans-serif;
+    animation: cookieIn 0.5s ease forwards;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @keyframes cookieIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cookie-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cookie-text {
+    flex: 1 1 320px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(240, 244, 248, 0.75);
+  }
+
+  .cookie-text strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #f0f4f8;
+    margin-bottom: 0.25rem;
+  }
+
+  .cookie-text a {
+    color: #6bb5d9;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cookie-text a:hover { color: #f0f4f8; }
+
+  .cookie-buttons {
+    display: flex;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-btn {
+    border: none;
+    cursor: pointer;
+    padding: 0.7rem 1.3rem;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    font-family: inherit;
+    transition: all 0.3s ease;
+  }
+
+  .cookie-btn-primary {
+    background: linear-gradient(135deg, #4a9aca, #3a7db0);
+    color: white;
+  }
+
+  .cookie-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(74, 154, 202, 0.35);
+  }
+
+  .cookie-btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f0f4f8;
+  }
+
+  .cookie-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(74, 154, 202, 0.3);
+  }
+
+  @media (max-width: 600px) {
+    .cookie-inner { flex-direction: column; align-items: stretch; }
+    .cookie-buttons { justify-content: stretch; }
+    .cookie-btn { flex: 1; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var KEY = 'amalfi-cookie-consent';
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+
+    function loadAnalytics() {
+      // Hook for optional analytics — only fired after explicit consent.
+      window.dispatchEvent(new CustomEvent('cookie-consent-granted'));
+    }
+
+    function setConsent(value) {
+      try {
+        localStorage.setItem(
+          KEY,
+          JSON.stringify({ value: value, ts: new Date().toISOString(), v: 1 })
+        );
+      } catch (_e) { /* ignore */ }
+      banner.hidden = true;
+      if (value === 'accepted') loadAnalytics();
+    }
+
+    var stored = null;
+    try { stored = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_e) {}
+
+    if (!stored || !stored.value) {
+      banner.hidden = false;
+    } else if (stored.value === 'accepted') {
+      loadAnalytics();
+    }
+
+    banner.addEventListener('click', function (e) {
+      var t = e.target;
+      if (!(t instanceof HTMLElement)) return;
+      var action = t.getAttribute('data-cookie-action');
+      if (action === 'accept') setConsent('accepted');
+      if (action === 'reject') setConsent('rejected');
+    });
+  })();
+</script>
