@@ -7,13 +7,13 @@ module.exports = {
       name: 'katerina',
       cwd: '/home/greg/katerina',
       script: 'dist/server/entry.mjs',
-      node_args: [],
+      // Node 20.6+ natively loads a .env file; keeps secrets out of PM2 dump.
+      node_args: '--env-file=/home/greg/katerina/.env',
       env: {
         NODE_ENV: 'production',
         HOST: '127.0.0.1',
         PORT: '30014',
       },
-      env_file: '/home/greg/katerina/.env',
       max_memory_restart: '256M',
       autorestart: true,
       watch: false,
